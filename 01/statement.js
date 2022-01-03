@@ -1,6 +1,10 @@
 const plays = require('./plays.json');
 const invoices = require('./invoices.json');
 
+function playFor(aPerformance) {
+  return plays[aPerformance.playID];
+}
+
 function amountFor(aPerformance, play) {
   let result = 0;
 
@@ -24,7 +28,7 @@ function amountFor(aPerformance, play) {
   return result;
 }
 
-function statement(invoice, plays) {
+function statement(invoice) {
   let totalAmount = 0;
   let volumeCredits = 0;
   let result = `청구내역 (고객명: ${invoice.customer})\n`;
@@ -35,7 +39,7 @@ function statement(invoice, plays) {
   }).format;
 
   for (let perf of invoice.perfomances) {
-    const play = plays[perf.playID];
+    const play = playFor(perf);
     let thisAmount = amountFor(perf, play);
 
     // 포인트를 적립한다.
@@ -55,4 +59,4 @@ function statement(invoice, plays) {
   return result;
 }
 
-console.log(statement(invoices[0], plays));
+console.log(statement(invoices[0]));

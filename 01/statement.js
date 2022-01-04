@@ -11,7 +11,7 @@ function statement(invoice) {
     }석)\n`;
   }
 
-  result += `총액 : ${usd(appleSauce())}\n`;
+  result += `총액 : ${usd(totalAmount())}\n`;
   result += `적립 포인트 : ${totalVolumeCredits()}점\n`;
   return result;
 
@@ -19,12 +19,12 @@ function statement(invoice) {
     return plays[aPerformance.playID];
   }
 
-  function appleSauce() {
-    let totalAmount = 0;
+  function totalAmount() {
+    let result = 0;
     for (let perf of invoice.perfomances) {
-      totalAmount += amountFor(perf);
+      result += amountFor(perf);
     }
-    return totalAmount;
+    return result;
   }
 
   function volumeCreditsFor(aPerformance) {

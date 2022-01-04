@@ -8,7 +8,7 @@ function playFor(aPerformance) {
 function amountFor(aPerformance) {
   let result = 0;
 
-  switch (playFor(perf).type) {
+  switch (playFor(aPerformance).type) {
     case 'tragedy': // 비극
       result = 40000;
       if (aPerformance.audience > 30) {

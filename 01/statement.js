@@ -2,6 +2,14 @@ const plays = require('./plays.json');
 const invoices = require('./invoices.json');
 const createStatementData = require('./createStatementData');
 
+function usd(aNumber) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  }).format(aNumber / 100);
+}
+
 function statement(invoice, plays) {
   return renderPlainText(createStatementData(invoice, plays));
 }
@@ -17,14 +25,6 @@ function renderPlainText(data) {
   result += `총액 : ${usd(data.totalAmount)}\n`;
   result += `적립 포인트 : ${data.totalVolumeCredits}점\n`;
   return result;
-
-  function usd(aNumber) {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2,
-    }).format(aNumber / 100);
-  }
 }
 
 console.log(statement(invoices[0], plays));

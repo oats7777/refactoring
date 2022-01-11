@@ -51,7 +51,7 @@ module.exports = function createStatementData(invoice, plays) {
     const result = Object.assign({}, aPerformance); // 얕은 복사 수행
     result.play = calculator.play;
     result.amount = calculator.amount;
-    result.volumeCredits = volumeCreditsFor(result);
+    result.volumeCredits = calculator.volumeCredits;
     return result;
   }
 
@@ -61,11 +61,6 @@ module.exports = function createStatementData(invoice, plays) {
 
   function totalVolumeCredits(data) {
     return data.performances.reduce((total, p) => total + p.volumeCredits, 0);
-  }
-
-  function volumeCreditsFor(aPerformance) {
-    return new PerformanceCalculator(aPerformance, aPerformance.play)
-      .volumeCredits;
   }
 
   function totalAmount(data) {
